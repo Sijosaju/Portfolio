@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" defer />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Portfolio</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link active">HOME</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">SERVICES</a></li>
+                <li class="nav-item"><a href="#works" class="nav-link">MY WORKS</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title animate-text">Hey, I'm [Your Name]</h1>
+                <p class="hero-subtitle animate-text">
+                    A Creative Developer with a Passion for Building Innovative Digital Experiences
+                </p>
+                <div class="hero-buttons animate-text">
+                    <a href="#works" class="btn btn-primary">Explore My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+                </div>
+            </div>
+            <div class="hero-visual animate-visual">
+                <div class="visual-placeholder">3D Visual Placeholder</div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#about" class="scroll-link">
+                <span class="scroll-icon">↓</span>
+                <span class="scroll-text">Scroll Down</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section animate-on-scroll">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I'm a passionate developer with expertise in creating cutting-edge web applications 
+                    and digital experiences. My approach combines technical excellence with creative 
+                    problem-solving to deliver solutions that truly make an impact.
+                </p>
+                <p>
+                    With years of experience in the industry, I specialize in modern web technologies, 
+                    user interface design, and performance optimization. I believe in writing clean, 
+                    maintainable code that scales with your business needs.
+                </p>
+            </div>
+            <div class="about-image animate-image">
+                <p>Professional Photo Placeholder</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section animate-on-scroll">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+            <div class="service-card animate-card">
+                <div class="service-icon">🎨</div>
+                <h3 class="service-title">Web Design</h3>
+                <p class="service-description">
+                    Creating beautiful, responsive designs that engage users and drive conversions. 
+                    Every pixel is crafted with purpose and attention to detail.
+                </p>
+            </div>
+            <div class="service-card animate-card">
+                <div class="service-icon">💻</div>
+                <h3 class="service-title">Web Development</h3>
+                <p class="service-description">
+                    Building robust, scalable web applications using the latest technologies. 
+                    From concept to deployment, I handle the entire development lifecycle.
+                </p>
+            </div>
+            <div class="service-card animate-card">
+                <div class="service-icon">📱</div>
+                <h3 class="service-title">Mobile Development</h3>
+                <p class="service-description">
+                    Developing cross-platform mobile applications that provide seamless user 
+                    experiences across all devices and operating systems.
+                </p>
+            </div>
+            <div class="service-card animate-card">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-title">Performance Optimization</h3>
+                <p class="service-description">
+                    Optimizing applications for speed, performance, and scalability. Every 
+                    millisecond matters in creating exceptional user experiences.
+                </p>
+            </div>
+            <div class="service-card animate-card">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Technical Consulting</h3>
+                <p class="service-description">
+                    Providing strategic technical guidance to help businesses make informed 
+                    decisions about their technology stack and architecture.
+                </p>
+            </div>
+            <div class="service-card animate-card">
+                <div class="service-icon">🚀</div>
+                <h3 class="service-title">Digital Strategy</h3>
+                <p class="service-description">
+                    Developing comprehensive digital strategies that align with business goals 
+                    and drive measurable results in the digital landscape.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section with Loading State -->
+    <section id="works" class="section animate-on-scroll">
+        <h2 class="section-title">My Works</h2>
+        <div class="works-loading" id="works-loading">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p>Loading Projects...</p>
+        </div>
+        <div class="swiper-container" id="swiper-container" style="display: none;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="work-card">
+                        <div class="work-image">Project Screenshot Placeholder</div>
+                        <div class="work-content">
+                            <h3 class="work-title">E-Commerce Platform</h3>
+                            <p class="work-description">
+                                A full-stack e-commerce solution with real-time inventory management, 
+                                payment processing, and analytics dashboard.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="work-card">
+                        <div class="work-image">Project Screenshot Placeholder</div>
+                        <div class="work-content">
+                            <h3 class="work-title">Task Management App</h3>
+                            <p class="work-description">
+                                A collaborative task management application with real-time updates, 
+                                team collaboration features, and progress tracking.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="work-card">
+                        <div class="work-image">Project Screenshot Placeholder</div>
+                        <div class="work-content">
+                            <h3 class="work-title">Data Visualization Dashboard</h3>
+                            <p class="work-description">
+                                An interactive dashboard for data visualization with real-time charts, 
+                                filters, and export capabilities for business intelligence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="work-card">
+                        <div class="work-image">Project Screenshot Placeholder</div>
+                        <div class="work-content">
+                            <h3 class="work-title">Social Media Platform</h3>
+                            <p class="work-description">
+                                A modern social media platform with real-time messaging, content sharing, 
+                                and advanced privacy controls.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev">←</div>
+            <div class="swiper-button-next">→</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section animate-on-scroll">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item animate-contact">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>hello@yourportfolio.com</p>
+                    </div>
+                </div>
+                <div class="contact-item animate-contact">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="contact-item animate-contact">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>New York, NY</p>
+                    </div>
+                </div>
+                <div class="contact-item animate-contact">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <h4>LinkedIn</h4>
+                        <p>linkedin.com/in/yourprofile</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form animate-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="handleSubmit()">SEND MESSAGE</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer animate-on-scroll">
+        <p>© 2025 Your Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- External Libraries (Deferred) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <script src="main.js"></script>
+</body>
+</html>
