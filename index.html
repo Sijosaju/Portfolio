@@ -5,61 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header id="home">
         <nav>
             <div class="logo">Portfolio</div>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#works">Works</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#works" class="nav-link">Works</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
-        <div class="hero">
-            <div class="hero-content">
-                <h1>Hello, I'm a Developer</h1>
-                <p>Creating the future with code and creativity.</p>
-                <a href="#works" class="cta-button">Explore My Works</a>
-            </div>
-            <div class="hero-photo">
-                <div class="photo-placeholder">[Your Photo Here]</div>
+        <div class="social-media">
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Hi, I’m Sijo S</h1>
+                <p><span class="dynamic-text"></span></p>
+                <div class="cta-buttons">
+                    <a href="#works" class="cta-button">Explore My Work</a>
+                    <a href="#contact" class="cta-button">Let's Connect</a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="photo-placeholder">
+                    <div class="water-border"></div>
+                    Your Photo Here
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">↓</a>
     </header>
 
     <section id="about">
         <h2>About Me</h2>
         <div class="about-wrapper">
             <div class="about-photo">
-                <div class="photo-placeholder">[Your Photo Here]</div>
+                <div class="photo-placeholder">Your Photo Here</div>
             </div>
             <div class="about-details">
-                <p class="about-description">I'm a passionate developer with a focus on creating seamless and visually stunning web experiences. With a strong background in both front-end and back-end development, I strive to deliver projects that are not only functional but also aesthetically pleasing. My journey in tech started over 5 years ago, and since then, I've worked on a variety of projects ranging from small business websites to large-scale web applications.</p>
+                <p class="about-description">I’m a dedicated developer with over 5 years of experience in creating seamless and visually appealing web applications. Specializing in both front-end and back-end development, I deliver projects that balance functionality with aesthetic excellence. My journey in tech is driven by a love for problem-solving and continuous learning.</p>
                 <div class="tech-stack">
                     <h3>My Tech Stack</h3>
-                    <div class="tech-bubbles">
-                        <span class="tech-bubble">HTML</span>
-                        <span class="tech-bubble">CSS</span>
-                        <span class="tech-bubble">JavaScript</span>
-                        <span class="tech-bubble">React</span>
-                        <span class="tech-bubble">Node.js</span>
-                        <span class="tech-bubble">Python</span>
-                        <span class="tech-bubble">Git</span>
-                        <span class="tech-bubble">MongoDB</span>
+                    <div class="tech-bubbles-container">
+                        <div class="tech-bubbles">
+                            <span class="tech-bubble">HTML</span>
+                            <span class="tech-bubble">CSS</span>
+                            <span class="tech-bubble">JavaScript</span>
+                            <span class="tech-bubble">React</span>
+                            <span class="tech-bubble">Node.js</span>
+                            <span class="tech-bubble">Python</span>
+                            <span class="tech-bubble">Git</span>
+                            <span class="tech-bubble">MongoDB</span>
+                            <!-- Duplicated for seamless loop -->
+                            <span class="tech-bubble">HTML</span>
+                            <span class="tech-bubble">CSS</span>
+                            <span class="tech-bubble">JavaScript</span>
+                            <span class="tech-bubble">React</span>
+                            <span class="tech-bubble">Node.js</span>
+                            <span class="tech-bubble">Python</span>
+                            <span class="tech-bubble">Git</span>
+                            <span class="tech-bubble">MongoDB</span>
+                        </div>
                     </div>
                 </div>
                 <div class="about-content">
                     <div class="about-card">
                         <h3>Experience</h3>
-                        <p>Over 5 years in web development, working with diverse clients and technologies.</p>
+                        <p>5+ years in web development, collaborating with diverse clients across industries.</p>
                     </div>
                     <div class="about-card">
                         <h3>Passion</h3>
-                        <p>Driven by innovation, design, and the desire to solve complex problems.</p>
+                        <p>Fueled by innovation, design, and crafting impactful digital experiences.</p>
                     </div>
                 </div>
             </div>
@@ -68,26 +96,26 @@
 
     <section id="services">
         <h2>Services</h2>
-        <p class="section-intro">I offer a range of services to help bring your ideas to life. Whether you need a custom website, a user-friendly interface, or technical consulting, I'm here to assist.</p>
+        <p class="section-intro">I provide tailored solutions to bring your vision to life, ensuring quality and efficiency at every step.</p>
         <div class="services-grid">
             <div class="service-card">
                 <h3>Web Development</h3>
-                <p>Custom websites tailored to your needs, built with modern technologies to ensure performance and scalability.</p>
+                <p>Custom, high-performance websites built with modern technologies for scalability and user engagement.</p>
             </div>
             <div class="service-card">
                 <h3>UI/UX Design</h3>
-                <p>Designing intuitive user experiences with a focus on usability, accessibility, and visual appeal.</p>
+                <p>Intuitive and visually appealing designs focused on usability and accessibility.</p>
             </div>
             <div class="service-card">
                 <h3>Consulting</h3>
-                <p>Expert advice on tech solutions, helping you choose the right tools and strategies for your project.</p>
+                <p>Strategic guidance to help you select the best tools and approaches for your projects.</p>
             </div>
         </div>
     </section>
 
     <section id="skills">
         <h2>Skills</h2>
-        <p class="section-intro">Here are some of the technologies and skills I specialize in. I continuously learn and adapt to stay updated with the latest trends in the tech industry.</p>
+        <p class="section-intro">A selection of my core competencies, honed through years of hands-on experience.</p>
         <div class="skills-grid">
             <div class="skill-bar">
                 <p>HTML/CSS</p>
@@ -110,24 +138,55 @@
 
     <section id="works">
         <h2>My Works</h2>
-        <p class="section-intro">A showcase of some of my recent projects. Each one reflects my dedication to quality and creativity.</p>
+        <p class="section-intro">A curated collection of projects showcasing my expertise and creativity.</p>
         <div class="works-carousel">
             <button class="carousel-arrow left-arrow">←</button>
             <div class="carousel-container">
                 <div class="work-card">
-                    <div class="work-thumbnail">[Thumbnail Placeholder]</div>
-                    <h3>Project 1</h3>
-                    <p>A modern web application built with React and Node.js, featuring real-time data updates and a sleek user interface.</p>
+                    <div class="work-thumbnail">AI Assistant</div>
+                    <div class="work-details">
+                        <h3>JARVIS V6 Assistant</h3>
+                        <p>MERN Stack Development</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="work-card">
-                    <div class="work-thumbnail">[Thumbnail Placeholder]</div>
-                    <h3>Project 2</h3>
-                    <p>An interactive e-commerce platform with a focus on user experience, payment integration, and responsive design.</p>
+                    <div class="work-thumbnail">Event Platform</div>
+                    <div class="work-details">
+                        <h3>Zenith Events</h3>
+                        <p>A fully responsive event booking platform built with React and Node.js.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="work-card">
-                    <div class="work-thumbnail">[Thumbnail Placeholder]</div>
-                    <h3>Project 3</h3>
-                    <p>A mobile-first application designed for accessibility, featuring offline support and a minimalist design.</p>
+                    <div class="work-thumbnail">E-commerce</div>
+                    <div class="work-details">
+                        <h3>Online Retail Recommendation System</h3>
+                        <p>Machine Learning</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-thumbnail">Website</div>
+                    <div class="work-details">
+                        <h3>Website to Indian Sign Language Translator</h3>
+                        <p>Speech to Indian Sign Language Translator</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">AI</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button class="carousel-arrow right-arrow">→</button>
@@ -136,7 +195,7 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <p class="section-intro">Let's create something amazing together. Fill out the form below to get in touch!</p>
+        <p class="section-intro">Let’s collaborate to create something extraordinary. Reach out via the form below.</p>
         <div class="contact-form">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -147,10 +206,10 @@
                 <input type="email" id="email" placeholder="Your Email" required>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description">Message</label>
                 <textarea id="description" placeholder="Your Message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="cta-button">Submit</button>
+            <button type="submit" class="cta-button">Send Message</button>
         </div>
     </section>
 

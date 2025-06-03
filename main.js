@@ -1,8 +1,8 @@
-// Smooth Scroll for Navigation Links
+// Smooth Scroll for Navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(anchor.getAttribute('href'));
         target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
@@ -10,30 +10,58 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar Background on Scroll
+// Navbar Background and Active Link on Scroll
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section, header');
+    let currentSection = '';
+
     if (window.scrollY > 50) {
         nav.classList.add('scrolled');
     } else {
         nav.classList.remove('scrolled');
     }
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
 });
 
-// Reveal Sections on Scroll
+// Reveal Elements on Scroll
 const sections = document.querySelectorAll('section');
-const revealSection = () => {
-    const triggerBottom = window.innerHeight * 0.8;
+const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .about-photo .photo-placeholder');
+
+const revealElements = () => {
+    const triggerBottom = window.innerHeight * 0.9;
+
     sections.forEach(section => {
         const sectionTop = section.getBoundingClientRect().top;
         if (sectionTop < triggerBottom) {
             section.classList.add('visible');
         }
     });
+
+    elementsToReveal.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < triggerBottom) {
+            element.classList.add('visible');
+        }
+    });
 };
 
-window.addEventListener('scroll', revealSection);
-revealSection();
+window.addEventListener('scroll', revealElements);
+revealElements();
 
 // Animate Skill Bars on Scroll
 const skillBars = document.querySelectorAll('.progress');
@@ -54,38 +82,92 @@ const carouselContainer = document.querySelector('.carousel-container');
 const workCards = Array.from(document.querySelectorAll('.work-card'));
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
-
 let currentIndex = 0;
+let autoSlideInterval;
 
-function updateCarousel() {
+function initializeCarousel() {
     workCards.forEach((card, index) => {
-        card.classList.remove('center', 'left', 'right');
-        const relativeIndex = (index - currentIndex + workCards.length) % workCards.length;
-        if (relativeIndex === 0) {
+        if (index === 0) {
             card.classList.add('center');
-        } else if (relativeIndex === workCards.length - 1) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateX(0) scale(1)';
+        } else if (index === workCards.length - 1) {
             card.classList.add('left');
-        } else if (relativeIndex === 1) {
+            card.style.opacity = '0.7';
+            card.style.transform = 'translateX(-60%) scale(0.9)';
+        } else if (index === 1) {
             card.classList.add('right');
+            card.style.opacity = '0.7';
+            card.style.transform = 'translateX(60%) scale(0.9)';
+        } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(120%) scale(0.8)';
         }
     });
-
-    const offset = -currentIndex * (100 / 3);
-    carouselContainer.style.transform = `translateX(${offset}%)`;
 }
 
-leftArrow.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + workCards.length) % workCards.length;
-    updateCarousel();
-});
+function updateCarousel(direction) {
+    workCards.forEach(card => {
+        card.classList.remove('center', 'left', 'right');
+    });
 
-rightArrow.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % workCards.length;
-    updateCarousel();
-});
+    const totalCards = workCards.length;
+    if (direction === 'right') {
+        currentIndex = (currentIndex + 1) % totalCards;
+    } else {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    }
 
-// Initialize the carousel
-updateCarousel();
+    const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
+    const rightIndex = (currentIndex + 1) % totalCards;
+
+    workCards.forEach((card, index) => {
+        if (index === currentIndex) {
+            card.classList.add('center');
+            card.style.opacity = '1';
+            card.style.transform = 'translateX(0) scale(1)';
+        } else if (index === leftIndex) {
+            card.classList.add('left');
+            card.style.opacity = '0.7';
+            card.style.transform = 'translateX(-60%) scale(0.9)';
+        } else if (index === rightIndex) {
+            card.classList.add('right');
+            card.style.opacity = '0.7';
+            card.style.transform = 'translateX(60%) scale(0.9)';
+        } else {
+            card.style.opacity = '0';
+            if (direction === 'right') {
+                card.style.transform = 'translateX(120%) scale(0.8)';
+            } else {
+                card.style.transform = 'translateX(-120%) scale(0.8)';
+            }
+        }
+    });
+}
+
+function moveLeft() {
+    clearInterval(autoSlideInterval);
+    updateCarousel('left');
+    startAutoSlide();
+}
+
+function moveRight() {
+    clearInterval(autoSlideInterval);
+    updateCarousel('right');
+    startAutoSlide();
+}
+
+leftArrow.addEventListener('click', moveLeft);
+rightArrow.addEventListener('click', moveRight);
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        moveRight();
+    }, 3000);
+}
+
+initializeCarousel();
+startAutoSlide();
 
 // Scroll Progress Indicator
 const progressBar = document.querySelector('.scroll-progress');
@@ -113,16 +195,34 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Dynamic Hero Text Animation
+// Dynamic Text Typewriter Animation
 (function() {
-    const heroText = document.querySelector('.hero h1');
-    const text = heroText.textContent;
-    heroText.textContent = '';
-    text.split('').forEach((char, index) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.animationDelay = `${index * 0.1}s`;
-        span.classList.add('char');
-        heroText.appendChild(span);
-    });
+    const dynamicText = document.querySelector('.dynamic-text');
+    const texts = ['Front End Developer', 'Back End Developer'];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentText = texts[textIndex];
+        if (!isDeleting) {
+            dynamicText.textContent = currentText.substring(0, charIndex++);
+            if (charIndex > currentText.length) {
+                isDeleting = true;
+                setTimeout(type, 1000);
+                return;
+            }
+        } else {
+            dynamicText.textContent = currentText.substring(0, charIndex--);
+            if (charIndex < 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(type, 500);
+                return;
+            }
+        }
+        setTimeout(type, isDeleting ? 50 : 100);
+    }
+
+    setTimeout(type, 1000);
 })();
