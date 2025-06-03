@@ -40,7 +40,28 @@ window.addEventListener('scroll', () => {
 
 // Reveal Elements on Scroll
 const sections = document.querySelectorAll('section');
-const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .about-photo .photo-placeholder, .testimonials h3, .testimonial-card');
+const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .testimonials h3, .testimonial-card');
+const aboutPhoto = document.querySelector('.about-photo .photo-placeholder');
+let hasShaken = false; // Flag to track if shake animation has played
+
+// Add visible class to home page components on load and trigger shake if About is in view
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('header').classList.add('visible');
+    document.querySelector('nav').classList.add('visible');
+    document.querySelector('.logo').classList.add('visible');
+    document.querySelector('.social-media').classList.add('visible');
+    document.querySelector('.hero').classList.add('visible');
+    document.querySelector('.cta-buttons').classList.add('visible');
+    document.querySelector('.scroll-down').classList.add('visible');
+
+    // Check if About section is in view on load
+    const triggerBottom = window.innerHeight * 0.9;
+    const aboutPhotoTop = aboutPhoto.getBoundingClientRect().top;
+    if (aboutPhotoTop < triggerBottom && !hasShaken) {
+        aboutPhoto.classList.add('visible', 'shake');
+        hasShaken = true;
+    }
+});
 
 const revealElements = () => {
     const triggerBottom = window.innerHeight * 0.9;
@@ -49,6 +70,8 @@ const revealElements = () => {
         const sectionTop = section.getBoundingClientRect().top;
         if (sectionTop < triggerBottom) {
             section.classList.add('visible');
+        } else {
+            section.classList.remove('visible');
         }
     });
 
@@ -56,8 +79,22 @@ const revealElements = () => {
         const elementTop = element.getBoundingClientRect().top;
         if (elementTop < triggerBottom) {
             element.classList.add('visible');
+        } else {
+            element.classList.remove('visible');
         }
     });
+
+    // Handle About photo animation
+    const aboutPhotoTop = aboutPhoto.getBoundingClientRect().top;
+    if (aboutPhotoTop < triggerBottom) {
+        aboutPhoto.classList.add('visible');
+        if (!hasShaken) {
+            aboutPhoto.classList.add('shake');
+            hasShaken = true; // Set flag to prevent shake on subsequent scrolls
+        }
+    } else {
+        aboutPhoto.classList.remove('visible');
+    }
 };
 
 window.addEventListener('scroll', revealElements);
@@ -71,6 +108,8 @@ const animateSkillBars = () => {
         const barTop = bar.getBoundingClientRect().top;
         if (barTop < triggerBottom) {
             bar.classList.add('visible');
+        } else {
+            bar.classList.remove('visible');
         }
     });
 };
