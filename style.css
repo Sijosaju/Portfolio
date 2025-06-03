@@ -14,6 +14,25 @@ body {
     position: relative;
 }
 
+/* Cursor Follower */
+.cursor-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: #BB86FC;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, background 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower.hover {
+    background: #FFFFFF;
+    filter: grayscale(100%);
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
 /* Header and Navigation */
 header {
     position: relative;
@@ -71,7 +90,7 @@ nav ul li a {
     font-size: 18px;
     font-weight: 500;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
 }
 
 nav ul li a.active::after,
@@ -87,6 +106,7 @@ nav ul li a:hover::after {
 }
 
 nav ul li a:hover {
+    color: #BB86FC;
     transform: translateY(-2px);
     text-shadow: 0 0 5px #BB86FC;
 }
@@ -95,7 +115,7 @@ nav ul li a:hover {
 .social-media {
     position: fixed;
     left: 20px;
-    top: 60%; /* Moved slightly down */
+    top: 60%;
     transform: translateY(-50%);
     z-index: 1000;
 }
@@ -113,7 +133,7 @@ nav ul li a:hover {
 }
 
 .social-icons:hover {
-    background: rgba(187, 134, 252, 0.2); /* Added background color on hover */
+    background: rgba(187, 134, 252, 0.2);
     box-shadow: 0 0 15px rgba(0, 221, 235, 0.3);
 }
 
@@ -126,7 +146,7 @@ nav ul li a:hover {
 
 .social-icon:hover {
     color: #BB86FC;
-    transform: scale(1.5); /* Enlarge icon on hover */
+    transform: scale(1.5);
 }
 
 /* Hero Section */
@@ -141,7 +161,7 @@ nav ul li a:hover {
 
 .hero-content {
     flex: 1;
-    margin-left: 80px; /* Moved slightly right to create space from social media oval */
+    margin-left: 80px;
 }
 
 .hero-photo {
@@ -550,8 +570,8 @@ h2:hover::after {
 .tech-bubble:hover {
     background: rgba(0, 255, 255, 0.3);
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    transform: scale(1.2); /* Enlarge first */
-    animation: shake 0.5s ease-in-out 0.3s; /* Shake after enlarging */
+    transform: scale(1.2);
+    animation: shake 0.5s ease-in-out 0.3s;
 }
 
 @keyframes shake {
@@ -643,6 +663,103 @@ h2:hover::after {
 .service-card p {
     font-size: 14px;
     color: #FFFFFF;
+}
+
+/* Testimonials Section */
+.testimonials {
+    margin-top: 60px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonials h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    opacity: 0;
+    transition: opacity 0.6s ease 0.3s;
+}
+
+.testimonials h3.visible {
+    opacity: 1;
+}
+
+.testimonials-row {
+    overflow: hidden;
+    position: relative;
+    padding: 20px 40px;
+}
+
+.testimonials-row::before,
+.testimonials-row::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 1;
+}
+
+.testimonials-row::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.testimonials-row::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.testimonials-row .testimonials-container {
+    display: flex;
+    gap: 20px;
+    animation: slide-left 20s linear infinite;
+}
+
+.testimonials-row.reverse .testimonials-container {
+    animation: slide-right 20s linear infinite;
+}
+
+@keyframes slide-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 300px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.testimonial-card.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.testimonial-card:hover {
+    background: rgba(0, 221, 235, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 221, 235, 0.2);
+}
+
+.testimonial-card p {
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.testimonial-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BB86FC;
 }
 
 /* Skills Section */
@@ -988,8 +1105,8 @@ footer:hover {
 /* Scroll-to-Top Button */
 .scroll-top {
     position: fixed;
-    bottom: 60px; /* Adjusted to ensure fully visible */
-    right: 60px; /* Confirmed on the right */
+    bottom: 60px;
+    right: 60px;
     background: transparent;
     color: #FFFFFF;
     border: 2px solid #FFFFFF;
@@ -1007,8 +1124,8 @@ footer:hover {
 }
 
 .scroll-top.visible {
-    opacity: 1 !important; /* Ensured visibility */
-    visibility: visible !important;
+    opacity: 1;
+    visibility: visible;
 }
 
 .scroll-top::before {
@@ -1042,7 +1159,7 @@ footer:hover {
     }
 
     .hero-content {
-        margin-left: 0; /* Reset margin for smaller screens */
+        margin-left: 0;
     }
 
     .hero-photo {
@@ -1139,6 +1256,14 @@ footer:hover {
         right: 30px;
         bottom: 30px;
     }
+
+    .testimonials-row {
+        padding: 10px 20px;
+    }
+
+    .testimonial-card {
+        min-width: 250px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1233,5 +1358,13 @@ footer:hover {
         width: 50px;
         height: 50px;
         font-size: 20px;
+    }
+
+    .testimonials-row {
+        padding: 10px 10px;
+    }
+
+    .testimonial-card {
+        min-width: 200px;
     }
 }

@@ -40,7 +40,7 @@ window.addEventListener('scroll', () => {
 
 // Reveal Elements on Scroll
 const sections = document.querySelectorAll('section');
-const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .about-photo .photo-placeholder');
+const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .about-photo .photo-placeholder, .testimonials h3, .testimonial-card');
 
 const revealElements = () => {
     const triggerBottom = window.innerHeight * 0.9;
@@ -226,3 +226,20 @@ window.addEventListener('scroll', () => {
 
     setTimeout(type, 1000);
 })();
+
+// Cursor Follower
+const cursorFollower = document.querySelector('.cursor-follower');
+document.addEventListener('mousemove', (e) => {
+    cursorFollower.style.left = `${e.clientX}px`;
+    cursorFollower.style.top = `${e.clientY}px`;
+});
+
+const interactiveElements = document.querySelectorAll('a, button, .nav-link, .social-icon, .cta-button, .carousel-arrow, .scroll-top, .tech-bubble, .work-card, .testimonial-card');
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        cursorFollower.classList.add('hover');
+    });
+    element.addEventListener('mouseleave', () => {
+        cursorFollower.classList.remove('hover');
+    });
+});
