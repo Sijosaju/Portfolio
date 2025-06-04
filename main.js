@@ -251,7 +251,7 @@ window.addEventListener('scroll', () => {
 // Dynamic Text Typewriter Animation
 (function() {
     const dynamicText = document.querySelector('.dynamic-text');
-    const texts = ['Front End Developer', 'Back End Developer','Flutter Developer','Web Designer'];
+    const texts = ['Front End Developer', 'Back End Developer','Flutter App Developer','Web Designer'];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
