@@ -10,7 +10,14 @@
 </head>
 <body>
     <div class="cursor-follower"></div>
-    <header id="home">
+    <div class="social-media">
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
         <nav>
             <div class="logo">Portfolio</div>
             <ul>
@@ -22,14 +29,9 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
-        <div class="social-media">
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-            </div>
-        </div>
+    <header id="home">
+        
+        
         <div class="hero">
             <div class="hero-content">
                 <h1>Hi, I’m Sijo S</h1>
@@ -39,12 +41,56 @@
                     <a href="#contact" class="cta-button">Let's Connect</a>
                 </div>
             </div>
-            <div class="hero-photo">
-                <div class="photo-placeholder">
-                    <div class="water-border"></div>
-                    Your Photo Here
-                </div>
-            </div>
+         <div class="hero-photo">
+  <svg viewBox="0 0 200 200" class="blob-mask" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Gradient for stroke -->
+      <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00DDEB" />
+        <stop offset="100%" stop-color="#BB86FC" />
+      </linearGradient>
+
+      <!-- Clip path for image -->
+      <clipPath id="blobClip">
+        <path id="blobClipPath"
+          d="M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z">
+          <animate attributeName="d"
+            dur="4s"
+            repeatCount="indefinite"
+            values="
+              M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z;
+              M 100,10 C 150,10 200,60 190,100 C 180,140 130,190 100,190 C 70,190 20,140 10,100 C 0,60 50,10 100,10 Z;
+              M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z
+            " />
+        </path>
+      </clipPath>
+    </defs>
+
+    <!-- Animated border path -->
+    <path
+      d="M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z"
+      fill="none"
+      stroke="url(#blobGradient)"
+      stroke-width="8">
+      <animate attributeName="d"
+        dur="4s"
+        repeatCount="indefinite"
+        values="
+          M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z;
+          M 100,10 C 150,10 200,60 190,100 C 180,140 130,190 100,190 C 70,190 20,140 10,100 C 0,60 50,10 100,10 Z;
+          M 100,10 C 140,10 190,50 190,100 C 190,150 140,190 100,190 C 60,190 10,150 10,100 C 10,50 60,10 100,10 Z
+        " />
+    </path>
+
+    <!-- Clipped image -->
+    <image href="images/profile3.jpg"
+      x="0" y="0" width="200" height="200"
+      clip-path="url(#blobClip)"
+      preserveAspectRatio="xMidYMid slice" />
+  </svg>
+</div>
+
+
         </div>
         <a href="#about" class="scroll-down">↓</a>
     </header>
@@ -53,7 +99,9 @@
         <h2>About Me</h2>
         <div class="about-wrapper">
             <div class="about-photo">
-                <div class="photo-placeholder">Your Photo Here</div>
+                <div class="photo-placeholder">
+                    <img src="images/dp.jpg" alt="Profile Photo" class="dp">
+                </div>
             </div>
             <div class="about-details">
                 <p class="about-description">I’m a dedicated developer with over 5 years of experience in creating seamless and visually appealing web applications. Specializing in both front-end and back-end development, I deliver projects that balance functionality with aesthetic excellence. My journey in tech is driven by a love for problem-solving and continuous learning.</p>
@@ -195,6 +243,59 @@
                 <p>Node.js</p>
                 <div class="progress" style="--width: 75%;"></div>
             </div>
+        </div>
+    </section>
+    
+    <section id="career">
+        <h2>Education & Experience</h2>
+        <div class="career-container">
+            <div class="career-item">
+                <div class="career-experience">
+                    <h3>Senior Web Developer</h3>
+                    <p>Blue Cube Digital</p>
+                    <p>Developed and managed web projects, including frontend/backend, CMS dashboards, and responsive, accessible web pages with PHP, MySQL, and JavaScript.</p>
+                </div>
+                <div class="career-year">
+                    <p>2017</p>
+                </div>
+                <div class="career-education">
+                    <h3>Bachelor's in Computer Science</h3>
+                    <p>University of XYZ</p>
+                    <p>Completed coursework in algorithms, data structures, and web technologies, with a focus on practical application through projects.</p>
+                </div>
+            </div>
+            <div class="career-item">
+                <div class="career-experience">
+                    <h3>Associate Solution Leader</h3>
+                    <p>Brane Enterprises</p>
+                    <p>Built web features, product prototypes, and reusable components/microservices, implemented UI improvements and 3D UI interface with TypeScript.</p>
+                </div>
+                <div class="career-year">
+                    <p>2020</p>
+                </div>
+                <div class="career-education">
+                    <h3>Advanced Web Development Course</h3>
+                    <p>Online Certification</p>
+                    <p>Specialized training in modern JavaScript frameworks, focusing on React, Node.js, and TypeScript, with hands-on projects.</p>
+                </div>
+            </div>
+            <div class="career-item">
+                <div class="career-experience">
+                    <h3>Freelance & Upskilling</h3>
+                    <p>Freelance</p>
+                    <p>Worked as a freelancer for various clients, providing 3D and web services, while upskilling in multiple areas to expand my tech stack.</p>
+                </div>
+                <div class="career-year">
+                    <p>NOW</p>
+                </div>
+                <div class="career-education">
+                    <h3>Ongoing Learning</h3>
+                    <p>Self-Directed</p>
+                    <p>Currently exploring advanced topics in AI, machine learning, and 3D web technologies to enhance my skill set.</p>
+                </div>
+            </div>
+        
+            <a href="#" class="resume-button">Resume <i class="fas fa-download"></i></a>
         </div>
     </section>
 

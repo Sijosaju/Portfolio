@@ -40,7 +40,7 @@ window.addEventListener('scroll', () => {
 
 // Reveal Elements on Scroll
 const sections = document.querySelectorAll('section');
-const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .testimonials h3, .testimonial-card');
+const elementsToReveal = document.querySelectorAll('.hero h1, .hero p, .section-intro, h2, .about-description, .tech-stack h3, .tech-bubble, .about-card, .service-card, .skill-bar, .testimonials h3, .testimonial-card, #career h2, .career-item');
 const aboutPhoto = document.querySelector('.about-photo .photo-placeholder');
 let hasShaken = false; // Flag to track if shake animation has played
 
@@ -86,15 +86,29 @@ const revealElements = () => {
 
     // Handle About photo animation
     const aboutPhotoTop = aboutPhoto.getBoundingClientRect().top;
-    if (aboutPhotoTop < triggerBottom) {
-        aboutPhoto.classList.add('visible');
-        if (!hasShaken) {
-            aboutPhoto.classList.add('shake');
-            hasShaken = true; // Set flag to prevent shake on subsequent scrolls
-        }
-    } else {
-        aboutPhoto.classList.remove('visible');
-    }
+const isInView = aboutPhotoTop < triggerBottom && aboutPhotoTop > 0;
+
+if (isInView) {
+  if (!aboutPhoto.classList.contains('shake-in-progress')) {
+    // Prevent repeat during same scroll
+    aboutPhoto.classList.remove('float'); // Stop float
+    aboutPhoto.classList.add('shake-once', 'shake-in-progress');
+
+    setTimeout(() => {
+      aboutPhoto.classList.remove('shake-once');
+      aboutPhoto.classList.add('float'); // Resume float after shake
+    }, 600); // duration of shake
+
+    // Allow it to shake again on next scroll in
+    setTimeout(() => {
+      aboutPhoto.classList.remove('shake-in-progress');
+    }, 1500);
+  }
+}
+
+
+
+
 };
 
 window.addEventListener('scroll', revealElements);
@@ -237,7 +251,7 @@ window.addEventListener('scroll', () => {
 // Dynamic Text Typewriter Animation
 (function() {
     const dynamicText = document.querySelector('.dynamic-text');
-    const texts = ['Front End Developer', 'Back End Developer'];
+    const texts = ['Front End Developer', 'Back End Developer','Flutter Developer','Web Designer'];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -282,3 +296,16 @@ interactiveElements.forEach(element => {
         cursorFollower.classList.remove('hover');
     });
 });
+// Animate the vertical line in career section like a meteor
+const careerContainer = document.querySelector('.career-container');
+window.addEventListener('scroll', () => {
+  const rect = careerContainer.getBoundingClientRect();
+  const trigger = window.innerHeight * 0.9;
+
+  if (rect.top < trigger) {
+    careerContainer.classList.add('visible');
+  } else {
+    careerContainer.classList.remove('visible');
+  }
+});
+
