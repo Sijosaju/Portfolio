@@ -363,5 +363,16 @@ if (socialToggle && socialIcons && window.innerWidth <= 768) {
       alert("⚠️ Error sending message. Check your internet or try again.");
     }
   });
+  document.addEventListener("DOMContentLoaded", () => {
+  const bubbles = document.querySelectorAll('.tech-bubble');
+  bubbles.forEach(bubble => {
+    const duration = 3 + Math.random() * 3; // 3s–6s
+    const delay = Math.random() * 3;        // 0s–3s
+    bubble.style.animationDuration = `${duration}s`;
+    bubble.style.animationDelay = `${delay}s`;
+  });
+});
+
+
 
 
