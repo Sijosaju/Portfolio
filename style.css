@@ -2134,8 +2134,6 @@ footer:hover {
     margin-bottom: 0; /* Rely on gap from .career-item */
   }
 }
-
-
 /* === FULL RESPONSIVENESS PATCH === */
 
 /* Prevent horizontal scroll caused by wide elements */
@@ -2194,41 +2192,31 @@ nav {
     }
 }
 
-/* Ensure .hero and .hero-photo don't overflow */
-.hero {
-    padding: 120px 20px 80px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.hero-content {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.hero-photo {
-    width: 100%;
-    max-width: 250px;
-    margin-top: 20px;
-}
-
-.blob-mask {
-    width: 100%;
-    height: auto;
-}
-@media (max-width: 480px) {
-  .blob-mask image {
-    width: 100%;
-    height: auto;
-    preserveAspectRatio: xMidYMid meet;
-  }
-}
 @media (max-width: 768px) {
   .hero {
     flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+  }
+
+  .hero-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .hero-photo {
+    width: 100%;
+    max-width: 250px;
+    margin-top: 20px;
+  }
+
+  .blob-mask {
+    width: 100%;
+    height: auto;
   }
 }
+
 
 
