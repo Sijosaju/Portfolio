@@ -280,12 +280,33 @@ window.addEventListener('scroll', () => {
     setTimeout(type, 1000);
 })();
 
-// Cursor Follower
 const cursorFollower = document.querySelector('.cursor-follower');
+
+// 🖱️ For mouse (desktop)
 document.addEventListener('mousemove', (e) => {
     cursorFollower.style.left = `${e.clientX}px`;
     cursorFollower.style.top = `${e.clientY}px`;
+    cursorFollower.style.opacity = '1';
 });
+
+// 📱 For touch devices
+document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    cursorFollower.style.left = `${touch.clientX}px`;
+    cursorFollower.style.top = `${touch.clientY}px`;
+    cursorFollower.style.opacity = '1';
+});
+
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    cursorFollower.style.left = `${touch.clientX}px`;
+    cursorFollower.style.top = `${touch.clientY}px`;
+});
+
+document.addEventListener('touchend', () => {
+    cursorFollower.style.opacity = '0';
+});
+
 
 const interactiveElements = document.querySelectorAll('a, button, .nav-link, .social-icon, .cta-button, .carousel-arrow, .scroll-top, .tech-bubble, .work-card, .testimonial-card');
 interactiveElements.forEach(element => {
