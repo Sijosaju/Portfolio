@@ -2134,3 +2134,101 @@ footer:hover {
     margin-bottom: 0; /* Rely on gap from .career-item */
   }
 }
+
+
+/* === FULL RESPONSIVENESS PATCH === */
+
+/* Prevent horizontal scroll caused by wide elements */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Force nav to wrap and stay inside screen */
+nav {
+    flex-wrap: wrap;
+}
+
+/* Hide nav links initially on mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 60px;
+        background: rgba(0, 0, 0, 0.95);
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255,255,255,0.2);
+        z-index: 999;
+    }
+
+    .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        gap: 15px;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav ul li a {
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+    }
+}
+
+/* Ensure .hero and .hero-photo don't overflow */
+.hero {
+    padding: 120px 20px 80px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.hero-photo {
+    width: 100%;
+    max-width: 250px;
+    margin-top: 20px;
+}
+
+.blob-mask {
+    width: 100%;
+    height: auto;
+}
+@media (max-width: 480px) {
+  .blob-mask image {
+    width: 100%;
+    height: auto;
+    preserveAspectRatio: xMidYMid meet;
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+  }
+}
+
+
