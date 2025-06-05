@@ -2219,8 +2219,100 @@ nav {
 }
 
 
-.cursor-follower {
-    opacity: 0; /* hidden by default */
-    transition: opacity 0.3s ease, transform 0.1s ease, border-color 0.3s ease;
+@media (max-width: 768px) {
+    .cursor-follower {
+        display: none !important;
+    }
 }
+
+/* === Mobile Social Toggle Button === */
+.social-toggle-wrapper {
+  position: fixed;
+  left: 15px;
+  bottom: 80px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .social-icons {
+    display: none;
+  }
+
+  .social-icons.open {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .social-toggle-button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0, 221, 235, 0.4);
+  }
+
+  .social-toggle-button i {
+    font-size: 20px;
+    color: white;
+    z-index: 3;
+  }
+
+  .dotted-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px dotted #00DDEB;
+    border-radius: 50%;
+    animation: rotateDots 2s linear infinite;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  @keyframes rotateDots {
+    0% {
+      transform: rotate(0deg) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: rotate(180deg) scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+      opacity: 0.5;
+    }
+  }
+}
+/* Hide only the toggle button on desktop */
+@media (min-width: 769px) {
+  .social-toggle-button {
+    display: none !important;
+  }
+
+  .social-icons {
+    display: flex !important;
+    flex-direction: column;
+    gap: 15px;
+    position: fixed;
+    left: 20px;
+    top: 65%;
+    transform: translateY(-50%);
+  }
+}
+
+
+
 
