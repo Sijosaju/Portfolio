@@ -373,6 +373,28 @@ if (socialToggle && socialIcons && window.innerWidth <= 768) {
   });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const techBubbles = document.querySelectorAll('.tech-bubble');
+  techBubbles.forEach(bubble => {
+    const container = document.querySelector('.tech-bubbles');
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+
+    // Random position
+    const x = Math.random() * (containerWidth - 100);
+    const y = Math.random() * (containerHeight - 50);
+
+    bubble.style.left = `${x}px`;
+    bubble.style.top = `${y}px`;
+
+    // Random animation delay & duration
+    const delay = Math.random() * 5;
+    const duration = 4 + Math.random() * 4;
+    bubble.style.animationDelay = `${delay}s`;
+    bubble.style.animationDuration = `${duration}s`;
+  });
+});
+
 
 
 
