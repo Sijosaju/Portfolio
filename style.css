@@ -1877,33 +1877,35 @@ footer:hover {
         padding: 60px 30px;
     }
 
-    .career-container::before {
-        left: 30px;
-        transform: translateX(0);
-    }
+   /* REPLACE the existing .career-container::before, .career-container::after,
+   and .career-year rules within @media (max-width: 768px) with these: */
 
-    .career-item {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 40px;
-    }
+.career-container::before { /* The main animated line */
+    content: '';
+    position: absolute;
+    top: 20px; /* Adjusted for potentially less padding on smaller screens */
+    left: 10px;  /* Closer to the edge for very small screens */
+    transform: translateX(0);
+    width: 3px; /* Even narrower for small mobile */
+    height: 0;
+    background: linear-gradient(to bottom, #00DDEB 0%, #BB86FC 70%, transparent 100%);
+    z-index: 0;
+    border-radius: 1.5px;
+    transition: height 2s ease-in-out;
+    box-shadow: 0 0 3px rgba(187, 134, 252, 0.3);
+}
 
-    .career-experience {
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
+.career-container.visible::before {
+    height: calc(100% - 40px); /* Adjust height calculation for smaller screens */
+}
 
-    .career-year {
-        left: 30px;
-        transform: translateX(0);
-        width: 50px;
-        height: 50px;
-        font-size: 14px;
-    }
+.career-container::after { /* Glowing head - kept hidden */
+    display: none !important;
+}
 
-    .career-education {
-        padding-left: 0;
-    }
+.career-year { /* Year circles - remain hidden */
+    display: none !important;
+}
 
     .career-socials {
         position: static;
@@ -1973,4 +1975,162 @@ footer:hover {
         font-size: 12px;
         padding: 8px 15px;
     }
+}
+
+/* ✅ Mobile/Tablet Responsive Styles */
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    font-size: 24px;
+    color: white;
+    z-index: 1100;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: slideDown 0.5s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 20px;
+    margin-right: 0;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+  }
+
+  .career-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 20px; /* Prevents scroll bar overlap */
+  }
+
+  .career-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .career-experience,
+  .career-year,
+  .career-education {
+    width: 100%;
+  }
+
+  /* ✅ Hide year circle or vertical timeline on small screens */
+  .career-year {
+    display: none;
+  }
+
+  /* ✅ Fix about photo zoom issue on mobile/tablet */
+  .about-photo .photo-placeholder {
+    width: 250px !important;
+    height: 350px !important;
+    transform: none !important;
+    scale: 1 !important;
+  }
+}
+
+/* ✅ Hide hamburger menu on desktop */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none !important;
+  }
+}
+
+/* ✅ Fix Education and Experience ONLY for Mobile/Tablet */
+@media (max-width: 768px) {
+  /* Hide the animated vertical timeline line */
+  .career-container::before,
+  .career-container::after {
+    display: none !important;
+  }
+
+  /* Hide year circles */
+  .career-year {
+    display: none !important;
+  }
+
+  /* Stack content: experience on top, education below */
+  .career-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px 15px;
+    /* background: none !important; /* Your file might have this, keep as is or remove if not needed */
+  }
+
+  .career-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; /* This is fine, centers blocks if they don't fill height */
+    text-align: center; /* Ensures text within the item defaults to center */
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    gap: 20px; /* Spacing between experience & education blocks */
+    width: 100%; /* Added for robustness, ensuring it takes full available width */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* ADDED for hover */
+  }
+
+  .career-item:hover { /* ADDED for hover effect */
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 221, 235, 0.2); /* Cyan shadow like service card */
+    background: rgba(255, 255, 255, 0.05); /* Slightly lighter background */
+  }
+
+  /* This existing rule correctly centers text for h3 and p tags inside .career-item */
+  .career-item h3,
+  .career-item p {
+    text-align: center;
+  }
+
+  .career-experience {
+    order: 1;
+    width: 100%; /* Ensure it takes full width */
+    padding-right: 0; /* Remove desktop padding */
+    margin-bottom: 0; /* Rely on gap from .career-item */
+  }
+
+  .career-education {
+    order: 2;
+    width: 100%; /* Ensure it takes full width */
+    padding-left: 0; /* Remove desktop padding */
+    margin-bottom: 0; /* Rely on gap from .career-item */
+  }
 }

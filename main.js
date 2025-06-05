@@ -308,4 +308,12 @@ window.addEventListener('scroll', () => {
     careerContainer.classList.remove('visible');
   }
 });
+// ✅ Toggle mobile menu open/close
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  menuToggle.classList.toggle('open');
+});
 
