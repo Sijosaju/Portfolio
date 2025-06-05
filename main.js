@@ -334,11 +334,12 @@ menuToggle.addEventListener('click', () => {
 const socialToggle = document.getElementById('socialToggle');
 const socialIcons = document.getElementById('socialIcons');
 
-if (socialToggle && socialIcons && window.innerWidth <= 768) {
+if (socialToggle && socialIcons) {
     socialToggle.addEventListener('click', () => {
         socialIcons.classList.toggle('open');
     });
 }
+
 
   document.getElementById('contactForm').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -394,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bubble.style.animationDuration = `${duration}s`;
   });
 });
-
 
 
 

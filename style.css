@@ -231,16 +231,18 @@ nav ul li a:hover {
 }
 
 .social-icon:hover {
-    color: #BB86FC;
-    transform: scale(1.5) translateX(5px);
+    color: #000000;
+    transform: scale(1); /* Only scale, no X movement */
     animation: vibrate 0.3s ease-in-out infinite;
 }
 
+
+
 @keyframes vibrate {
-    0%, 100% { transform: scale(1.5) translateX(5px) rotate(0deg); }
-    25% { transform: scale(1.5) translateX(5px) rotate(2deg); }
-    50% { transform: scale(1.5) translateX(5px) rotate(-2deg); }
-    75% { transform: scale(1.5) translateX(5px) rotate(2deg); }
+    0%, 100% { transform: scale(1.5) translateX(1px) rotate(0deg); }
+    25% { transform: scale(1.5) translateX(1px) rotate(2deg); }
+    50% { transform: scale(1.5) translateX(1px) rotate(-2deg); }
+    75% { transform: scale(1.5) translateX(1px) rotate(2deg); }
 }
 
 /* Hero Section */
@@ -2260,16 +2262,30 @@ nav {
 }
 
 @media (max-width: 768px) {
-  .social-icons {
-    display: none;
-  }
-
-  .social-icons.open {
+ .social-icons {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 10px;
-  }
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+    
+    /* Add smooth scale effect */
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: center;
+}
+
+.social-icons.open {
+    transform: scale(1);
+    opacity: 1;
+}
+
 
   .social-toggle-button {
     position: relative;
@@ -2345,6 +2361,7 @@ nav {
     transform: none !important;
   }
 }
+
 
 
 
