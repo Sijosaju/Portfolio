@@ -395,6 +395,257 @@ document.addEventListener('DOMContentLoaded', () => {
     bubble.style.animationDuration = `${duration}s`;
   });
 });
+// ✅ Enhanced Setup oval nav link activation and smooth scroll
+const ovalLinks = document.querySelectorAll('.oval-link');
+const allSections = document.querySelectorAll('section, header');
+const mobileNavOval = document.querySelector('.mobile-nav-oval');
+document.addEventListener('DOMContentLoaded', () => {
+  // ✅ Ensure Home link is active and bubble is visible on initial load
+  updateActiveLink('home');
+});
 
 
+// Function to reset mobile-nav-oval scroll position to left
+function resetOvalScroll() {
+  if (mobileNavOval && window.innerWidth <= 1000) {
+    mobileNavOval.scrollLeft = 0;
+  }
+}
 
+// Function to force Home link to be active with proper styling
+function forceHomeActive() {
+  console.log('Forcing Home active...'); // Debug log
+  ovalLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#home') {
+      link.classList.add('active');
+      // Force multiple reflows to ensure CSS is applied
+      link.offsetHeight;
+      link.style.display = 'block';
+      link.offsetHeight;
+      link.style.display = '';
+      console.log('Home link activated:', link.classList.contains('active')); // Debug log
+    }
+  });
+}
+
+// Function to update active link with enhanced visibility
+function updateActiveLink(sectionId) {
+  console.log('Updating active link to:', sectionId); // Debug log
+  ovalLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${sectionId}`) {
+      link.classList.add('active');
+      // Force styling update
+      link.offsetHeight;
+      
+      // Scroll active link into view on mobile
+      if (window.innerWidth <= 1000 && mobileNavOval) {
+        setTimeout(() => {
+          const linkRect = link.getBoundingClientRect();
+          const navRect = mobileNavOval.getBoundingClientRect();
+          if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
+            link.scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest'
+            });
+          }
+        }, 100);
+      }
+    }
+  });
+}
+
+// Enhanced section detection
+function detectCurrentSection() {
+  let currentSection = 'home';
+  const scrollTop = window.pageYOffset;
+  
+  // If we're at the very top, always show home
+  if (scrollTop < 100) {
+    return 'home';
+  }
+  
+  // Check each section
+  allSections.forEach(section => {
+    const sectionId = section.getAttribute('id');
+    if (sectionId) {
+      const sectionTop = section.offsetTop - 200; // Adjust offset
+      const sectionBottom = sectionTop + section.offsetHeight;
+      
+      if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+        currentSection = sectionId;
+      }
+    }
+  });
+  
+  return currentSection;
+}
+
+// Function to update the active state bubble with IntersectionObserver
+function updateOvalBubble() {
+  let observer;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-100px 0px -50% 0px',
+    threshold: [0.1, 0.3, 0.5],
+  };
+
+  observer = new IntersectionObserver((entries) => {
+    const visibleEntries = entries
+      .filter(entry => entry.isIntersecting && entry.intersectionRatio > 0.1)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+    if (visibleEntries.length > 0) {
+      const newSectionId = visibleEntries[0].target.getAttribute('id');
+      if (newSectionId) {
+        updateActiveLink(newSectionId);
+      }
+    }
+  }, observerOptions);
+
+  // Observe all sections
+  allSections.forEach(section => {
+    if (section.getAttribute('id')) {
+      observer.observe(section);
+    }
+  });
+
+  return () => {
+    if (observer) {
+      allSections.forEach(section => observer.unobserve(section));
+    }
+  };
+}
+
+// Scroll-based fallback detection
+function fallbackScrollDetection() {
+  const currentSection = detectCurrentSection();
+  updateActiveLink(currentSection);
+}
+
+// Enhanced initialization
+function initializeMobileNav() {
+  console.log('Initializing mobile nav...'); // Debug log
+  
+  // Force Home to be active immediately
+  forceHomeActive();
+  resetOvalScroll();
+  
+  // Ensure the mobile nav is visible
+  if (mobileNavOval && window.innerWidth <= 1000) {
+    mobileNavOval.style.display = 'flex';
+  }
+}
+
+// Multiple initialization attempts
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing...'); // Debug log
+  initializeMobileNav();
+  
+  // Additional attempts with delays
+  setTimeout(() => {
+    console.log('First timeout initialization...'); // Debug log
+    initializeMobileNav();
+  }, 100);
+  
+  setTimeout(() => {
+    console.log('Second timeout initialization...'); // Debug log
+    initializeMobileNav();
+    
+    // Start the observers and scroll detection
+    const cleanupObserver = updateOvalBubble();
+    
+    // Add scroll event listener
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(fallbackScrollDetection, 100);
+    });
+    
+    // Cleanup on unload
+    window.addEventListener('unload', cleanupObserver);
+  }, 500);
+});
+
+// Window load event
+window.addEventListener('load', () => {
+  console.log('Window loaded, final initialization...'); // Debug log
+  setTimeout(() => {
+    initializeMobileNav();
+  }, 200);
+});
+
+// Handle clicks on oval links
+ovalLinks.forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const targetId = this.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      // Update active state immediately
+      ovalLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Scroll to section
+      targetSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      
+      // Scroll active link into view on mobile
+      if (window.innerWidth <= 1000 && mobileNavOval) {
+        setTimeout(() => {
+          this.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+            block: 'nearest'
+          });
+        }, 100);
+      }
+    }
+  });
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 1000) {
+    resetOvalScroll();
+    setTimeout(() => {
+      const activeLink = document.querySelector('.oval-link.active');
+      if (activeLink && mobileNavOval) {
+        activeLink.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }, 100);
+  }
+});
+
+// Force initialization on page visibility change
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    setTimeout(initializeMobileNav, 100);
+  }
+});
+
+// Prevent general a[href^="#"] from interfering with oval links
+document.querySelectorAll('a[href^="#"]:not(.oval-link)').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
