@@ -2386,7 +2386,7 @@ nav {
     gap: 10px;
     z-index: 1001;
     backdrop-filter: blur(8px);
-    max-width: 90%;
+    max-width: 60%;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none; /* Firefox */
