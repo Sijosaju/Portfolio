@@ -1047,27 +1047,32 @@ h2:hover::after {
 }
 
 .work-card {
-    flex: 0 0 35%;
-    padding: 20px;
-    border-radius: 20px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    transform: translateX(120%) scale(0.8);
-    transition: transform 0.7s ease, opacity 0.7s ease, z-index 0s;
-    z-index: 1;
-    width: 35%;
-    height: 450px;
-    box-shadow: 0 10px 30px rgba(0, 221, 235, 0.2);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  flex: 0 0 35%;
+  height: 450px;                  /* ✅ Fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  transform: translateX(120%) scale(0.8);
+  transition: transform 0.7s ease, opacity 0.7s ease, z-index 0s;
+  z-index: 1;
+  width: 35%;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)); /* ✅ Less see-through */
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 221, 235, 0.2);
 }
 
 .work-card.center {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    z-index: 3;
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 3;
+  background: #000000;  /* ✅ Solid for readability */
 }
 
 .work-card.left {
@@ -1093,17 +1098,21 @@ h2:hover::after {
 }
 
 
-.work-thumbnail img {
+.work-thumbnail {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+}
+
+
+.work-thumbnail img,
+.bmi-thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 15px 15px 0 0;
-}
-.bmi-thumbnail {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;     /* ✅ Crops the bottom */
-  object-position: top;  /* ✅ Shows the top part */
+  object-position: top;
   display: block;
   border-radius: 15px 15px 0 0;
 }
@@ -1129,9 +1138,16 @@ h2:hover::after {
 }
 
 .work-details {
-    padding: 20px;
-    text-align: left;
-    color: #FFFFFF;
+  flex: 1;
+  background: #001f3f; /* A deeper custom navy */
+/* ✅ Ensure solid readable bottom */
+  padding: 20px;
+  text-align: left;
+  color: #FFFFFF;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .work-details h3 {
