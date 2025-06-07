@@ -12,31 +12,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Navbar Background and Active Link on Scroll
 window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section, header');
-    let currentSection = '';
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const ovalLinks = document.querySelectorAll('.oval-link'); // ✅ Add this
+  const sections = document.querySelectorAll('section, header');
+  //let currentSection = '';
 
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+
+ let currentSection = 'home';
+const scrollTop = window.pageYOffset;
+const windowHeight = window.innerHeight;
+
+sections.forEach(section => {
+  const sectionId = section.getAttribute('id');
+  if (sectionId) {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    // Check if section is at least halfway into the viewport
+    if (scrollTop + windowHeight / 2 >= sectionTop &&
+        scrollTop + windowHeight / 2 < sectionTop + sectionHeight) {
+      currentSection = sectionId;
     }
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (window.scrollY >= sectionTop) {
-            currentSection = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
-    });
+  }
 });
+
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${currentSection}`) {
+      link.classList.add('active');
+    }
+  });
+
+  // ✅ ADD this block to update mobile oval links too
+  ovalLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${currentSection}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
 
 // Reveal Elements on Scroll
 const sections = document.querySelectorAll('section');
@@ -428,7 +450,7 @@ function forceHomeActive() {
     }
   });
 }
-
+/*
 // Function to update active link with enhanced visibility
 function updateActiveLink(sectionId) {
   console.log('Updating active link to:', sectionId); // Debug log
@@ -455,7 +477,7 @@ function updateActiveLink(sectionId) {
       }
     }
   });
-}
+}*/
 
 // Enhanced section detection
 function detectCurrentSection() {
@@ -649,3 +671,4 @@ document.querySelectorAll('a[href^="#"]:not(.oval-link)').forEach(anchor => {
     }
   });
 });
+
