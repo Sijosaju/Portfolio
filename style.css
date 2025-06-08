@@ -13,9 +13,16 @@ body {
     line-height: 1.6;
     position: relative;
 }
-.dp{
-     transform: scale(0.9);
+.dp {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px;
 }
+
+
+
 
 .cursor-follower {
     position: fixed;
@@ -556,21 +563,15 @@ h2:hover::after {
 }
 
 .about-photo .photo-placeholder {
-    width: 450px;
-    height: 600px;
-    border-radius: 15px;
-    border: 2px solid #FFFFFF;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    font-size: 24px;
-    text-align: center;
-    padding: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 3 / 5;
+  background: transparent;
+  padding: 0;
+  border-radius: 15px;
+  overflow: hidden;
 }
+
 
 .about-photo .photo-placeholder.visible {
     animation: float 4s ease-in-out infinite;
