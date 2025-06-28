@@ -559,13 +559,13 @@ h2:hover::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 450px;
+    max-width: 400px;
 }
 
 .about-photo .photo-placeholder {
-  width: 100%;
-  max-width: 450px;
-  aspect-ratio: 3 / 5;
+  width: 90%;
+  max-width: 400px;
+  /*aspect-ratio: 3 / 5;*/
   background: transparent;
   padding: 0;
   border-radius: 15px;
@@ -2482,4 +2482,5 @@ nav {
     overflow-x: hidden; /* CORRECTED: Allows vertical scroll */
   }
 }
+
 
