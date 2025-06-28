@@ -506,17 +506,20 @@ section.visible {
 .section-intro.visible {
     opacity: 1;
 }
-
 h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 42px;
     font-weight: 700;
-    color: #FFFFFF;
+    color: #f0faff; /* soft white-blue */
     margin-bottom: 20px;
     position: relative;
     opacity: 0;
     transition: opacity 0.6s ease;
+    text-shadow: 0 0 10px rgba(0, 221, 235, 0.2), 0 0 20px rgba(0, 221, 235, 0.1);
 }
+
+
+
 
 h2.visible {
     opacity: 1;
@@ -658,6 +661,11 @@ h2:hover::after {
 
 .about-description.visible {
     opacity: 1;
+}
+
+h3 {
+    color: #d1b3ff; /* soft pastel purple */
+    text-shadow: 0 0 8px rgba(187, 134, 252, 0.2);
 }
 
 /* Tech Stack Bubbles */
