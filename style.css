@@ -1189,7 +1189,7 @@ h3 {
 
 .work-card {
     flex: 0 0 35%;
-    height: 450px;
+    height: 360px;
     /* ✅ Fixed height */
     display: flex;
     flex-direction: column;
@@ -1244,7 +1244,7 @@ h3 {
 
 .work-thumbnail {
     width: 100%;
-    height: 250px;
+    height: 190px;
     overflow: hidden;
     border-radius: 20px 20px 0 0;
     position: relative;
@@ -1293,6 +1293,7 @@ h3 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .work-details h3 {
@@ -1364,6 +1365,12 @@ h3 {
     background: #00DDEB;
     color: #000000;
     box-shadow: 0 0 12px rgba(0, 221, 235, 0.5);
+}
+
+.project-link-placeholder {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
 }
 
 .work-card.center .work-details {
@@ -1697,6 +1704,7 @@ footer:hover {
 
     #works {
         padding: 60px 15px;
+        overflow: hidden;
     }
 
     #works h2 {
@@ -1714,6 +1722,7 @@ footer:hover {
         gap: 14px;
         margin: 40px auto 0;
         height: auto;
+        padding: 0 8px;
     }
 
     .carousel-container {
@@ -1729,13 +1738,16 @@ footer:hover {
         position: relative;
         top: auto;
         flex: none;
-        width: 100%;
-        height: auto;
-        min-height: 0;
+        width: min(100%, 290px);
+        margin: 0 auto;
+        height: 285px !important;
+        min-height: 285px !important;
         display: none;
         opacity: 0 !important;
         transform: none !important;
         transition: opacity 0.35s ease;
+        border-radius: 14px;
+        box-shadow: 0 8px 22px rgba(0, 221, 235, 0.14);
     }
 
     .work-card.center {
@@ -1747,15 +1759,27 @@ footer:hover {
         display: none;
     }
 
+    .work-card.center {
+        box-shadow: none;
+    }
+
+    .work-thumbnail::before {
+        display: none;
+    }
+
     .work-thumbnail {
-        height: clamp(180px, 48vw, 240px);
+        flex: 0 0 100px;
+        height: 100px;
         font-size: 16px;
     }
 
     .work-details {
-        padding: 18px;
-        justify-content: flex-start;
+        flex: 1 1 0;
+        min-height: 0 !important;
+        padding: 14px;
+        justify-content: space-between;
         gap: 12px;
+        overflow: hidden;
     }
 
     .work-details h3 {
@@ -1784,6 +1808,11 @@ footer:hover {
         align-self: flex-start;
     }
 
+    .work-card:hover .work-thumbnail::before,
+    .work-card:hover .work-details::before {
+        display: none;
+    }
+
     .carousel-arrow {
         position: static;
         transform: none;
@@ -1791,6 +1820,10 @@ footer:hover {
         width: 35px;
         height: 35px;
         font-size: 18px;
+    }
+
+    .carousel-arrow::before {
+        display: none;
     }
 
     .carousel-arrow:hover {
@@ -1917,12 +1950,13 @@ footer:hover {
     }
 
     .work-thumbnail {
-        height: clamp(160px, 52vw, 210px);
+        height: 100px;
+        flex-basis: 100px;
         font-size: 14px;
     }
 
     .work-details {
-        padding: 16px;
+        padding: 12px;
     }
 
     .work-details h3 {
@@ -2033,8 +2067,20 @@ footer:hover {
 
 .career-experience {
     flex: 1;
+    min-width: 0;
     padding-right: 50px;
     text-align: left;
+}
+
+.career-item.experience-only .career-experience {
+    flex: 0 0 calc(50% - 50px);
+    max-width: calc(50% - 50px);
+}
+
+.career-experience h3,
+.career-experience p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .career-experience h3 {
@@ -2449,7 +2495,9 @@ footer:hover {
 
     .career-experience {
         order: 1;
+        flex: 1 1 auto !important;
         width: 100%;
+        max-width: 100% !important;
         /* Ensure it takes full width */
         padding-right: 0;
         /* Remove desktop padding */
