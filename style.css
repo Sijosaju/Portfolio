@@ -1312,6 +1312,7 @@ h3 {
 .tech-tags {
     display: flex;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .tech-tag {
@@ -1326,6 +1327,20 @@ h3 {
 
 .tech-tag:hover {
     background: rgba(0, 221, 235, 0.4);
+}
+
+.award-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.25), rgba(255, 152, 0, 0.25));
+    border: 1px solid #FFC107;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #FFC107;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin-left: 6px;
 }
 
 .project-link {
@@ -1693,40 +1708,107 @@ footer:hover {
     }
 
     .works-carousel {
-        height: 300px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: 14px;
+        margin: 40px auto 0;
+        height: auto;
+    }
+
+    .carousel-container {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        min-width: 0;
     }
 
     .work-card {
-        flex: 0 0 90%;
-        width: 90%;
-        height: 280px;
+        position: relative;
+        top: auto;
+        flex: none;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        display: none;
+        opacity: 0 !important;
+        transform: none !important;
+        transition: opacity 0.35s ease;
+    }
+
+    .work-card.center {
+        display: flex;
+        opacity: 1 !important;
+    }
+
+    .work-card.center .work-details::before {
+        display: none;
     }
 
     .work-thumbnail {
-        height: 140px;
+        height: clamp(180px, 48vw, 240px);
         font-size: 16px;
+    }
+
+    .work-details {
+        padding: 18px;
+        justify-content: flex-start;
+        gap: 12px;
     }
 
     .work-details h3 {
         font-size: 18px;
+        line-height: 1.35;
+        margin-bottom: 0;
     }
 
     .work-details p {
         font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .tech-tags {
+        gap: 8px;
+    }
+
+    .tech-tag {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .project-link {
+        margin-top: 0;
+        align-self: flex-start;
     }
 
     .carousel-arrow {
+        position: static;
+        transform: none;
+        align-self: center;
         width: 35px;
         height: 35px;
         font-size: 18px;
     }
 
+    .carousel-arrow:hover {
+        transform: scale(1.05);
+    }
+
     .left-arrow {
-        left: 5px;
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: end;
+        left: auto;
     }
 
     .right-arrow {
-        right: 5px;
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+        right: auto;
     }
 
     .social-media {
@@ -1831,16 +1913,16 @@ footer:hover {
     }
 
     .works-carousel {
-        height: 250px;
-    }
-
-    .work-card {
-        height: 240px;
+        gap: 14px;
     }
 
     .work-thumbnail {
-        height: 120px;
+        height: clamp(160px, 52vw, 210px);
         font-size: 14px;
+    }
+
+    .work-details {
+        padding: 16px;
     }
 
     .work-details h3 {
@@ -1849,10 +1931,11 @@ footer:hover {
 
     .work-details p {
         font-size: 12px;
+        line-height: 1.5;
     }
 
     .tech-tag {
-        font-size: 12px;
+        font-size: 11px;
         padding: 6px 10px;
     }
 
@@ -2146,6 +2229,15 @@ footer:hover {
 @media (max-width: 768px) {
     #career {
         padding: 50px 15px;
+    }
+
+    .career-container::before,
+    .career-container.visible::before,
+    .career-container::after,
+    .career-container.visible::after {
+        display: none !important;
+        height: 0 !important;
+        opacity: 0 !important;
     }
 
     .career-container::before {

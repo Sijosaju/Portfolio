@@ -157,46 +157,18 @@ const carouselContainer = document.querySelector('.carousel-container');
 const workCards = Array.from(document.querySelectorAll('.work-card'));
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
+const worksLayoutQuery = window.matchMedia('(max-width: 768px)');
 let currentIndex = 0;
 let autoSlideInterval;
 
-function initializeCarousel() {
-    workCards.forEach((card, index) => {
-        if (index === 0) {
-            card.classList.add('center');
-            card.style.opacity = '1';
-            card.style.transform = 'translateX(0) scale(1)';
-        } else if (index === workCards.length - 1) {
-            card.classList.add('left');
-            card.style.opacity = '0.7';
-            card.style.transform = 'translateX(-60%) scale(0.9)';
-        } else if (index === 1) {
-            card.classList.add('right');
-            card.style.opacity = '0.7';
-            card.style.transform = 'translateX(60%) scale(0.9)';
-        } else {
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(120%) scale(0.8)';
-        }
-    });
-}
-
-function updateCarousel(direction) {
-    workCards.forEach(card => {
-        card.classList.remove('center', 'left', 'right');
-    });
-
+function renderCarousel(direction = 'right') {
     const totalCards = workCards.length;
-    if (direction === 'right') {
-        currentIndex = (currentIndex + 1) % totalCards;
-    } else {
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-    }
-
     const leftIndex = (currentIndex - 1 + totalCards) % totalCards;
     const rightIndex = (currentIndex + 1) % totalCards;
 
     workCards.forEach((card, index) => {
+        card.classList.remove('center', 'left', 'right');
+
         if (index === currentIndex) {
             card.classList.add('center');
             card.style.opacity = '1';
@@ -211,13 +183,24 @@ function updateCarousel(direction) {
             card.style.transform = 'translateX(60%) scale(0.9)';
         } else {
             card.style.opacity = '0';
-            if (direction === 'right') {
-                card.style.transform = 'translateX(120%) scale(0.8)';
-            } else {
-                card.style.transform = 'translateX(-120%) scale(0.8)';
-            }
+            card.style.transform = 'translateX(120%) scale(0.8)';
         }
     });
+}
+
+function initializeCarousel() {
+    renderCarousel();
+}
+
+function updateCarousel(direction) {
+    const totalCards = workCards.length;
+    if (direction === 'right') {
+        currentIndex = (currentIndex + 1) % totalCards;
+    } else {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    }
+
+    renderCarousel(direction);
 }
 
 function moveLeft() {
@@ -240,6 +223,10 @@ function startAutoSlide() {
         moveRight();
     }, 3000);
 }
+
+worksLayoutQuery.addEventListener('change', () => {
+    renderCarousel();
+});
 
 initializeCarousel();
 startAutoSlide();
@@ -273,7 +260,7 @@ window.addEventListener('scroll', () => {
 // Dynamic Text Typewriter Animation
 (function() {
     const dynamicText = document.querySelector('.dynamic-text');
-    const texts = ['Front End Developer', 'Back End Developer','Flutter App Developer','Web Designer'];
+    const texts = ['Front End Developer', 'Back End Developer', 'Cloud Engineer', 'Flutter App Developer', 'Web Designer'];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -335,6 +322,13 @@ interactiveElements.forEach(element => {
 // Animate the vertical line in career section like a meteor
 const careerContainer = document.querySelector('.career-container');
 window.addEventListener('scroll', () => {
+  if (!careerContainer) return;
+
+  if (window.innerWidth <= 768) {
+    careerContainer.classList.remove('visible');
+    return;
+  }
+
   const rect = careerContainer.getBoundingClientRect();
   const trigger = window.innerHeight * 0.9;
 
